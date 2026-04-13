@@ -79,7 +79,7 @@ function App(): React.JSX.Element {
             })}
           </ToDoList>
           <Footer>
-            <FabButton>
+            <FabButton onClick={() => alert("Adicionar nova tarefa")}>
               <IconPlus />
             </FabButton>
           </Footer>
