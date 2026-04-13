@@ -1,10 +1,25 @@
 import "./dialog-style.css";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { treatError } from "../../utils/treatError";
 
-export function Dialog(): React.JSX.Element {
+export function Dialog({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}): React.JSX.Element {
   const dialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      openDialog();
+    } else {
+      closeDialog();
+    }
+    return;
+  }, [isOpen]);
 
   function openDialog(): void {
     try {
@@ -35,7 +50,7 @@ export function Dialog(): React.JSX.Element {
   return (
     <>
       <dialog ref={dialogRef}>
-        <button type="button" autoFocus onClick={closeDialog}>
+        <button type="button" autoFocus onClick={onClose}>
           Close dialog
         </button>
         <span>This is a dialog</span>

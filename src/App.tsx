@@ -1,6 +1,8 @@
 import type React from "react";
 import type { Task } from "./types/Task";
 
+import { useState } from "react";
+
 import { ChecklistsWrapper } from "./components/ChecklistsWrapper";
 import { Container } from "./components/Container";
 import { FabButton } from "./components/FabButton";
@@ -56,6 +58,16 @@ const completed: Task[] = [
 ];
 
 function App(): React.JSX.Element {
+  const [showDialog, setShowDialog]: [
+    boolean,
+    React.Dispatch<React.SetStateAction<boolean>>,
+  ] = useState(false);
+
+  function toggleDialog(): void {
+    setShowDialog(!showDialog);
+    return;
+  }
+
   return (
     <main>
       <Container>
@@ -64,7 +76,6 @@ function App(): React.JSX.Element {
             <IconSchool /> Plano de estudos
           </Heading>
         </Header>
-        <Dialog />
         <ChecklistsWrapper>
           <SubHeading>Para estudar</SubHeading>
           <ToDoList>
@@ -79,7 +90,8 @@ function App(): React.JSX.Element {
             })}
           </ToDoList>
           <Footer>
-            <FabButton onClick={() => alert("Adicionar nova tarefa")}>
+            <Dialog isOpen={showDialog} onClose={toggleDialog} />
+            <FabButton onClick={toggleDialog}>
               <IconPlus />
             </FabButton>
           </Footer>
