@@ -3,12 +3,16 @@ import "./dialog-style.css";
 import { useEffect, useRef } from "react";
 import { treatError } from "../../utils/treatError";
 
+import { IconClose } from "../icons";
+
 export function Dialog({
   isOpen,
   onClose,
+  children,
 }: {
   isOpen: boolean;
   onClose: () => void;
+  children?: React.ReactNode;
 }): React.JSX.Element {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -49,15 +53,19 @@ export function Dialog({
 
   return (
     <>
-      <dialog ref={dialogRef}>
-        <button type="button" autoFocus onClick={onClose}>
-          Close dialog
-        </button>
-        <span>This is a dialog</span>
+      <dialog ref={dialogRef} className="dialog">
+        <div className="dialog__btn-close-wrapper">
+          <button
+            type="button"
+            autoFocus
+            onClick={onClose}
+            className="btn-close-wrapper__btn"
+          >
+            <IconClose />
+          </button>
+          {children}
+        </div>
       </dialog>
-      <button type="button" onClick={openDialog}>
-        Open dialog
-      </button>
     </>
   );
 }

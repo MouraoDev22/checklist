@@ -1,4 +1,24 @@
 ::backdrop {
-  background-color: #000000;
-  opacity: 0.75;
+  background-color: #504d4d;
+  opacity: 0.85;
+}
+
+.dialog {
+  background-color: #1e1e1e;
+  border: none;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.dialog__btn-close-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn-close-wrapper__btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  align-self: flex-end;
 }

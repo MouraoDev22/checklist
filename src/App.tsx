@@ -90,7 +90,9 @@ function App(): React.JSX.Element {
             })}
           </ToDoList>
           <Footer>
-            <Dialog isOpen={showDialog} onClose={toggleDialog} />
+            <Dialog isOpen={showDialog} onClose={toggleDialog}>
+              <span>This is a dialog</span>
+            </Dialog>
             <FabButton onClick={toggleDialog}>
               <IconPlus />
             </FabButton>
