@@ -1,0 +1,8 @@
+.save-button {
+    background-color: #877EED;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 0.7rem;
+    cursor: pointer;
+    font-weight: 500;
+}

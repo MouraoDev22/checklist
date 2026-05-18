@@ -12,7 +12,7 @@ export function Dialog({
 }: {
   isOpen: boolean;
   onClose: () => void;
-  children?: React.ReactNode;
+  children: React.ReactNode;
 }): React.JSX.Element {
   const dialogRef = useRef<HTMLDialogElement>(null);
 

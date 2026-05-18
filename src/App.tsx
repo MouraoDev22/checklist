@@ -14,6 +14,8 @@ import { IconPlus, IconSchool } from "./components/icons";
 import { SubHeading } from "./components/SubHeading";
 import { ToDoItem } from "./components/ToDoItem";
 import { ToDoList } from "./components/ToDoList";
+import { TextInput } from "./components/TextInput";
+import { SaveButton } from "./components/SaveButton";
 
 const all: Task[] = [
   {
@@ -91,7 +93,15 @@ function App(): React.JSX.Element {
           </ToDoList>
           <Footer>
             <Dialog isOpen={showDialog} onClose={toggleDialog}>
-              <span>This is a dialog</span>
+              <form>
+                <TextInput
+                  type="text"
+                  placeholder="Digite o item que deseja adicionar"
+                />
+                <SaveButton type="submit" title="Salvar item">
+                  Salvar item
+                </SaveButton>
+              </form>
             </Dialog>
             <FabButton onClick={toggleDialog}>
               <IconPlus />
