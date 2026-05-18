@@ -1,10 +1,12 @@
 import "./save-button.style.css";
 
-export function SaveButton(
-  props: React.ButtonHTMLAttributes<HTMLButtonElement>): React.JSX.Element {
+export function SaveButton({
+  children,
+  ...rest
+}: React.ButtonHTMLAttributes<HTMLButtonElement>): React.JSX.Element {
   return (
-    <button {...props} className="save-button">
-      {props.children}
+    <button {...rest} className="save-button">
+      {children}
     </button>
   );
 }

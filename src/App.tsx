@@ -14,8 +14,7 @@ import { IconPlus, IconSchool } from "./components/icons";
 import { SubHeading } from "./components/SubHeading";
 import { ToDoItem } from "./components/ToDoItem";
 import { ToDoList } from "./components/ToDoList";
-import { TextInput } from "./components/TextInput";
-import { SaveButton } from "./components/SaveButton";
+import { ToDoForm } from "./components/ToDoForm";
 
 const all: Task[] = [
   {
@@ -70,6 +69,11 @@ function App(): React.JSX.Element {
     return;
   }
 
+  function addTodo(): void {
+    console.log("Precisamos add um novo todo");
+    return;
+  }
+
   return (
     <main>
       <Container>
@@ -93,15 +97,7 @@ function App(): React.JSX.Element {
           </ToDoList>
           <Footer>
             <Dialog isOpen={showDialog} onClose={toggleDialog}>
-              <form>
-                <TextInput
-                  type="text"
-                  placeholder="Digite o item que deseja adicionar"
-                />
-                <SaveButton type="submit" title="Salvar item">
-                  Salvar item
-                </SaveButton>
-              </form>
+              <ToDoForm onSubmit={addTodo} />
             </Dialog>
             <FabButton onClick={toggleDialog}>
               <IconPlus />
