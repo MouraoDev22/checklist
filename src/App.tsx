@@ -71,6 +71,7 @@ function App(): React.JSX.Element {
 
   function addTodo(): void {
     console.log("Precisamos add um novo todo");
+    toggleDialog();
     return;
   }
 
