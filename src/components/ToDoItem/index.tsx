@@ -3,7 +3,15 @@ import "./todo-item.style.css";
 import type { Task } from "../../types/Task";
 import { IconPencil, IconTrash } from "../icons";
 
-export function ToDoItem({ item }: { item: Task }): React.JSX.Element {
+export function ToDoItem({
+  item,
+  onToggleCompleted,
+  onDeleteTodo,
+}: {
+  item: Task;
+  onToggleCompleted: (todo: Task) => void;
+  onDeleteTodo: (todo: Task) => void;
+}): React.JSX.Element {
   const styles: string[] = ["todo-item"];
 
   if (item.completed) {
@@ -21,13 +29,14 @@ export function ToDoItem({ item }: { item: Task }): React.JSX.Element {
           className="checkbox"
           defaultChecked={item.completed}
           title="checkbox"
+          onClick={() => onToggleCompleted(item)}
         />
         <p className="description">{item.description}</p>
         <div className="actions">
-          <button className="btn" type="button" title="Excluir">
+          <button className="btn" type="button" title="Excluir" onClick={() => onDeleteTodo(item)}>
             <IconTrash />
           </button>
-          <button className="btn" type="button" title="Editar">
+          <button className="btn" type="button" title="Editar" onClick={() => alert("Em breve...")}>
             <IconPencil />
           </button>
         </div>
