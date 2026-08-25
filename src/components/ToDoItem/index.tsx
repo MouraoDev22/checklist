@@ -1,17 +1,21 @@
 import "./todo-item.style.css";
 
 import type { Task } from "../../types/Task";
-import { IconPencil, IconTrash } from "../icons";
 
-export function ToDoItem({
-  item,
-  onToggleCompleted,
-  onDeleteTodo,
-}: {
-  item: Task;
-  onToggleCompleted: (todo: Task) => void;
-  onDeleteTodo: (todo: Task) => void;
-}): React.JSX.Element {
+import { use } from "react";
+
+import { IconPencil, IconTrash } from "../icons";
+import TodoContext from "../TodoProvider/TodoContext";
+
+export function ToDoItem({ item }: { item: Task }): React.JSX.Element {
+  const {
+    toggleTodoCompleted,
+    deleteTodo,
+  }: {
+    toggleTodoCompleted: (todo: Task) => void;
+    deleteTodo: (todo: Task) => void;
+  } = use(TodoContext);
+
   const styles: string[] = ["todo-item"];
 
   if (item.completed) {
@@ -29,14 +33,24 @@ export function ToDoItem({
           className="checkbox"
           defaultChecked={item.completed}
           title="checkbox"
-          onClick={() => onToggleCompleted(item)}
+          onClick={() => toggleTodoCompleted(item)}
         />
         <p className="description">{item.description}</p>
         <div className="actions">
-          <button className="btn" type="button" title="Excluir" onClick={() => onDeleteTodo(item)}>
+          <button
+            className="btn"
+            type="button"
+            title="Excluir"
+            onClick={() => deleteTodo(item)}
+          >
             <IconTrash />
           </button>
-          <button className="btn" type="button" title="Editar" onClick={() => alert("Em breve...")}>
+          <button
+            className="btn"
+            type="button"
+            title="Editar"
+            onClick={() => alert("Em breve...")}
+          >
             <IconPencil />
           </button>
         </div>

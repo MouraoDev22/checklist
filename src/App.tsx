@@ -13,9 +13,7 @@ import { Header } from "./components/Header";
 import { Heading } from "./components/Heading";
 import { Dialog } from "./components/Dialog";
 import { IconPlus, IconSchool } from "./components/icons";
-import { SubHeading } from "./components/SubHeading";
-import { ToDoItem } from "./components/ToDoItem";
-import { ToDoList } from "./components/ToDoList";
+import { ToDoGroup } from "./components/ToDoGroup";
 import { ToDoForm } from "./components/ToDoForm";
 
 function App(): React.JSX.Element {
@@ -27,13 +25,9 @@ function App(): React.JSX.Element {
   const {
     todos,
     addTodo,
-    toggleTodoCompleted,
-    deleteTodo,
   }: {
     todos: Task[];
     addTodo: (formData: FormData) => void;
-    toggleTodoCompleted: (todo: Task) => void;
-    deleteTodo: (todo: Task) => void;
   } = use(TodoContext);
 
   function toggleDialog(): void {
@@ -56,36 +50,14 @@ function App(): React.JSX.Element {
           </Heading>
         </Header>
         <ChecklistsWrapper>
-          <SubHeading>Para estudar</SubHeading>
-          <ToDoList>
-            {todos
-              .filter((t: Task) => !t.completed)
-              .map(function (t) {
-                return (
-                  <ToDoItem
-                    key={t.id}
-                    item={t}
-                    onToggleCompleted={toggleTodoCompleted}
-                    onDeleteTodo={deleteTodo}
-                  />
-                );
-              })}
-          </ToDoList>
-          <SubHeading>Concluído</SubHeading>
-          <ToDoList>
-            {todos
-              .filter((t: Task) => t.completed)
-              .map(function (t) {
-                return (
-                  <ToDoItem
-                    key={t.id}
-                    item={t}
-                    onToggleCompleted={toggleTodoCompleted}
-                    onDeleteTodo={deleteTodo}
-                  />
-                );
-              })}
-          </ToDoList>
+          <ToDoGroup
+            heading="Para estudar"
+            items={todos.filter((t: Task) => !t.completed)}
+          />
+          <ToDoGroup
+            heading="Concluído"
+            items={todos.filter((t: Task) => t.completed)}
+          />
           <Footer>
             <Dialog isOpen={showDialog} onClose={toggleDialog}>
               <ToDoForm onSubmit={handleFormSubmit} />
