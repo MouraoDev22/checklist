@@ -1,7 +1,7 @@
 import type React from "react";
 import type { Task } from "./types/Task";
 
-import { useContext, useState } from "react";
+import { useState, use } from "react";
 
 import TodoContext from "./components/TodoProvider/TodoContext";
 
@@ -24,12 +24,28 @@ function App(): React.JSX.Element {
     React.Dispatch<React.SetStateAction<boolean>>,
   ] = useState(false);
 
+  const {
+    todos,
+    addTodo,
+    toggleTodoCompleted,
+    deleteTodo,
+  }: {
+    todos: Task[];
+    addTodo: (formData: FormData) => void;
+    toggleTodoCompleted: (todo: Task) => void;
+    deleteTodo: (todo: Task) => void;
+  } = use(TodoContext);
+
   function toggleDialog(): void {
     setShowDialog(!showDialog);
     return;
   }
 
-  const { todos, addTodo, toggleTodoCompleted, deleteTodo } = useContext(TodoContext);
+  function handleFormSubmit(formData: FormData): void {
+    addTodo(formData);
+    toggleDialog();
+    return;
+  }
 
   return (
     <main>
@@ -72,7 +88,7 @@ function App(): React.JSX.Element {
           </ToDoList>
           <Footer>
             <Dialog isOpen={showDialog} onClose={toggleDialog}>
-              <ToDoForm onSubmit={addTodo} />
+              <ToDoForm onSubmit={handleFormSubmit} />
             </Dialog>
             <FabButton onClick={toggleDialog}>
               <IconPlus />
