@@ -1,6 +1,6 @@
-import { useState } from "react";
-
 import type { Task } from "../../types/Task";
+
+import { useEffect, useState } from "react";
 import TodoContext from "./TodoContext";
 
 export function TodoProvider({ children }: { children: React.ReactNode }) {
@@ -21,6 +21,10 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
       createdAt: "2022-10-31",
     },
   ]);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   function addTodo(formData: FormData): void {
     const description: string | null = formData.get("description") as string;
