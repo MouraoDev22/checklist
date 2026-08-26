@@ -1,29 +1,20 @@
 import type { Task } from "../../types/Task";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import TodoContext from "./TodoContext";
 
+const TODOS: string = "todos";
+
 export function TodoProvider({ children }: { children: React.ReactNode }) {
+  const savedTodos: string | null = localStorage.getItem(TODOS);
+
   const [todos, setTodos]: [
     Task[],
     React.Dispatch<React.SetStateAction<Task[]>>,
-  ] = useState([
-    {
-      id: 1,
-      description: "JSX e componentes",
-      completed: false,
-      createdAt: "2022-10-31",
-    },
-    {
-      id: 2,
-      description: "Controle de inputs e formulários controlados",
-      completed: true,
-      createdAt: "2022-10-31",
-    },
-  ]);
+  ] = useState(savedTodos ? JSON.parse(savedTodos) : []);
 
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
+  useEffect((): void => {
+    localStorage.setItem("todos", JSON.stringify(TODOS));
   }, [todos]);
 
   function addTodo(formData: FormData): void {

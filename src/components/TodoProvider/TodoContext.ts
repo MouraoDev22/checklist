@@ -1,5 +1,5 @@
-import { createContext } from "react";
 import type { TodoContextType } from "../../types/TodoContextType";
+import { createContext } from "react";
 
 const TodoContext: React.Context<TodoContextType> =
   createContext<TodoContextType>({
