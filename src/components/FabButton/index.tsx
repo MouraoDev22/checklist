@@ -3,12 +3,9 @@ import "./fab-button.style.css";
 export function FabButton({
   children,
   ...rest
-}: {
-  children: React.ReactNode;
-  [key: string]: unknown;
-}): React.JSX.Element {
+}: React.ButtonHTMLAttributes<HTMLButtonElement>): React.JSX.Element {
   return (
-    <button className="fab" type="button" {...rest}>
+    <button {...rest} className="fab" type="button">
       {children}
     </button>
   );

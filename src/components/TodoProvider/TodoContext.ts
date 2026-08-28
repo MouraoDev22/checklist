@@ -7,6 +7,10 @@ const TodoContext: React.Context<TodoContextType> =
     addTodo: () => {},
     toggleTodoCompleted: () => {},
     deleteTodo: () => {},
+    showDialog: false,
+    openTodoFormDialog: () => {},
+    closeTodoFormDialog: () => {},
+    selectedTodo: null,
   });
 
 export default TodoContext;

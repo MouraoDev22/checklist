@@ -1,7 +1,7 @@
 import type React from "react";
 import type { Task } from "./types/Task";
 
-import { useState, use } from "react";
+import { use } from "react";
 
 import TodoContext from "./components/TodoProvider/TodoContext";
 
@@ -17,27 +17,25 @@ import { ToDoGroup } from "./components/ToDoGroup";
 import { ToDoForm } from "./components/ToDoForm";
 
 function App(): React.JSX.Element {
-  const [showDialog, setShowDialog]: [
-    boolean,
-    React.Dispatch<React.SetStateAction<boolean>>,
-  ] = useState(false);
-
   const {
     todos,
     addTodo,
+    showDialog,
+    openTodoFormDialog,
+    closeTodoFormDialog,
+    selectedTodo,
   }: {
     todos: Task[];
     addTodo: (formData: FormData) => void;
+    showDialog: boolean;
+    openTodoFormDialog: (todo?: Task) => void;
+    closeTodoFormDialog: () => void;
+    selectedTodo: Task | null;
   } = use(TodoContext);
-
-  function toggleDialog(): void {
-    setShowDialog(!showDialog);
-    return;
-  }
 
   function handleFormSubmit(formData: FormData): void {
     addTodo(formData);
-    toggleDialog();
+    closeTodoFormDialog();
     return;
   }
 
@@ -59,10 +57,14 @@ function App(): React.JSX.Element {
             items={todos.filter((t: Task) => t.completed)}
           />
           <Footer>
-            <Dialog isOpen={showDialog} onClose={toggleDialog}>
-              <ToDoForm onSubmit={handleFormSubmit} />
+            <Dialog isOpen={showDialog} onClose={closeTodoFormDialog}>
+              <ToDoForm
+                key={selectedTodo?.id ?? "new"}
+                onSubmit={handleFormSubmit}
+                defaultValue={selectedTodo?.description}
+              />
             </Dialog>
-            <FabButton onClick={toggleDialog}>
+            <FabButton onClick={() => openTodoFormDialog()}>
               <IconPlus />
             </FabButton>
           </Footer>

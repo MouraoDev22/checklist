@@ -11,9 +11,11 @@ export function ToDoItem({ item }: { item: Task }): React.JSX.Element {
   const {
     toggleTodoCompleted,
     deleteTodo,
+    openTodoFormDialog,
   }: {
     toggleTodoCompleted: (todo: Task) => void;
     deleteTodo: (todo: Task) => void;
+    openTodoFormDialog: (todo?: Task) => void;
   } = use(TodoContext);
 
   const styles: string[] = ["todo-item"];
@@ -31,9 +33,9 @@ export function ToDoItem({ item }: { item: Task }): React.JSX.Element {
         <input
           type="checkbox"
           className="checkbox"
-          defaultChecked={item.completed}
+          checked={item.completed}
+          onChange={() => toggleTodoCompleted(item)}
           title="checkbox"
-          onClick={() => toggleTodoCompleted(item)}
         />
         <p className="description">{item.description}</p>
         <div className="actions">
@@ -49,7 +51,7 @@ export function ToDoItem({ item }: { item: Task }): React.JSX.Element {
             className="btn"
             type="button"
             title="Editar"
-            onClick={() => alert("Em breve...")}
+            onClick={() => openTodoFormDialog(item)}
           >
             <IconPencil />
           </button>
