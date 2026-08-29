@@ -5,7 +5,11 @@ import TodoContext from "./TodoContext";
 
 const TODOS_KEY: string = "todos";
 
-export function TodoProvider({ children }: { children: React.ReactNode }): React.JSX.Element {
+export function TodoProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}): React.JSX.Element {
   const [showDialog, setShowDialog] = useState<boolean>(false);
 
   const [todos, setTodos] = useState<Task[]>((): Task[] => {
@@ -40,10 +44,11 @@ export function TodoProvider({ children }: { children: React.ReactNode }): React
 
     if (selectedTodo) {
       setTodos((prevState: Task[]): Task[] =>
-        prevState.map((t: Task): Task =>
-          t.id === selectedTodo.id
-            ? { ...t, description: trimmedDescription, completed: false }
-            : t,
+        prevState.map(
+          (t: Task): Task =>
+            t.id === selectedTodo.id
+              ? { ...t, description: trimmedDescription, completed: false }
+              : t,
         ),
       );
     } else {
@@ -94,6 +99,18 @@ export function TodoProvider({ children }: { children: React.ReactNode }): React
     return;
   }
 
+  function editTodo(formData: FormData): void {
+    setTodos((prevState: Task[]): Task[] => {
+      return prevState.map((t: Task): Task => {
+        if (t.id === selectedTodo!.id) {
+          return { ...t, description: formData.get("description") as string };
+        }
+        return t;
+      });
+    });
+    return;
+  }
+
   return (
     <TodoContext
       value={{
@@ -105,6 +122,7 @@ export function TodoProvider({ children }: { children: React.ReactNode }): React
         openTodoFormDialog,
         closeTodoFormDialog,
         selectedTodo,
+        editTodo,
       }}
     >
       {children}

@@ -1,15 +1,15 @@
 .save-button {
-    background-color: #877EED;
-    border: none;
-    border-radius: 1.5rem;
-    padding: 0.75rem 1rem;
-    cursor: pointer;
-    font-weight: 500;
-    line-height: 150%;
-    color: #FFFFFF;
-    transition: background-color 0.1s ease-in-out;
+  background-color: #877eed;
+  border: none;
+  border-radius: 1.5rem;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  line-height: 150%;
+  color: #ffffff;
+  transition: background-color 0.1s ease-in-out;
 }
 
 .save-button:hover {
-    background-color: #544ACB;
+  background-color: #544acb;
 }

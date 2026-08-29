@@ -11,6 +11,7 @@ const TodoContext: React.Context<TodoContextType> =
     openTodoFormDialog: () => {},
     closeTodoFormDialog: () => {},
     selectedTodo: null,
+    editTodo: () => {},
   });
 
 export default TodoContext;

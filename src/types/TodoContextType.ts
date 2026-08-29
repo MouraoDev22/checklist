@@ -9,4 +9,5 @@ export interface TodoContextType {
   openTodoFormDialog: (todo?: Task) => void;
   closeTodoFormDialog: () => void;
   selectedTodo: Task | null;
+  editTodo: (formData: FormData) => void;
 }

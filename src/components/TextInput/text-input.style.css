@@ -1,16 +1,16 @@
 .text-input {
-    font-size: 1rem;
-    line-height: 150%;
-    color: #EAEAEA;
-    border-radius: 1.5rem;
-    border: 1px solid #EAEAEA;
-    padding: 12px;
-    width: 22.5rem;
-    max-width: 100%;
-    background-color: transparent;
-    text-align: center;
+  font-size: 1rem;
+  line-height: 150%;
+  color: #eaeaea;
+  border-radius: 1.5rem;
+  border: 1px solid #eaeaea;
+  padding: 12px;
+  width: 22.5rem;
+  max-width: 100%;
+  background-color: transparent;
+  text-align: center;
 }
 
 .text-input::placeholder {
-    color: #EAEAEA;
+  color: #eaeaea;
 }

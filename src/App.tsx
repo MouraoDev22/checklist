@@ -24,6 +24,7 @@ function App(): React.JSX.Element {
     openTodoFormDialog,
     closeTodoFormDialog,
     selectedTodo,
+    editTodo,
   }: {
     todos: Task[];
     addTodo: (formData: FormData) => void;
@@ -31,10 +32,16 @@ function App(): React.JSX.Element {
     openTodoFormDialog: (todo?: Task) => void;
     closeTodoFormDialog: () => void;
     selectedTodo: Task | null;
+    editTodo: (formData: FormData) => void;
   } = use(TodoContext);
 
   function handleFormSubmit(formData: FormData): void {
-    addTodo(formData);
+    if (selectedTodo) {
+      editTodo(formData);
+    } else {
+      addTodo(formData);
+    }
+
     closeTodoFormDialog();
     return;
   }
