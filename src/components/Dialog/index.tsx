@@ -14,9 +14,10 @@ export function Dialog({
   onClose: () => void;
   children: React.ReactNode;
 }): React.JSX.Element {
-  const dialogRef = useRef<HTMLDialogElement>(null);
+  const dialogRef: React.RefObject<HTMLDialogElement | null> =
+    useRef<HTMLDialogElement>(null);
 
-  useEffect(() => {
+  useEffect((): void => {
     if (isOpen) {
       openDialog();
     } else {
@@ -24,6 +25,14 @@ export function Dialog({
     }
     return;
   }, [isOpen]);
+
+  useEffect((): (() => void) => {
+    const dialog: HTMLDialogElement | null = dialogRef.current;
+    dialog?.addEventListener("close", onClose);
+    return (): void => {
+      dialog?.removeEventListener("close", onClose);
+    };
+  }, [onClose]);
 
   function openDialog(): void {
     try {

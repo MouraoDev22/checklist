@@ -6,7 +6,7 @@ import TodoContext from "./TodoContext";
 const TODOS_KEY: string = "todos";
 
 export function TodoProvider({ children }: { children: React.ReactNode }): React.JSX.Element {
-  const [showDialog, setShowDialog] = useState(false);
+  const [showDialog, setShowDialog] = useState<boolean>(false);
 
   const [todos, setTodos] = useState<Task[]>((): Task[] => {
     const savedTodos: string | null = localStorage.getItem(TODOS_KEY);
@@ -64,8 +64,8 @@ export function TodoProvider({ children }: { children: React.ReactNode }): React
   }
 
   function toggleTodoCompleted(todo: Task): void {
-    setTodos((prevState: Task[]) => {
-      return prevState.map((t: Task) => {
+    setTodos((prevState: Task[]): Task[] => {
+      return prevState.map((t: Task): Task => {
         if (t.id === todo.id) {
           return { ...t, completed: !t.completed };
         }
@@ -76,8 +76,8 @@ export function TodoProvider({ children }: { children: React.ReactNode }): React
   }
 
   function deleteTodo(todo: Task): void {
-    setTodos((prevState: Task[]) => {
-      return prevState.filter((t: Task) => t.id !== todo.id);
+    setTodos((prevState: Task[]): Task[] => {
+      return prevState.filter((t: Task): boolean => t.id !== todo.id);
     });
     return;
   }

@@ -50,11 +50,11 @@ function App(): React.JSX.Element {
         <ChecklistsWrapper>
           <ToDoGroup
             heading="Para estudar"
-            items={todos.filter((t: Task) => !t.completed)}
+            items={todos.filter((t: Task): boolean => !t.completed)}
           />
           <ToDoGroup
             heading="Concluído"
-            items={todos.filter((t: Task) => t.completed)}
+            items={todos.filter((t: Task): boolean => t.completed)}
           />
           <Footer>
             <Dialog isOpen={showDialog} onClose={closeTodoFormDialog}>
@@ -64,7 +64,7 @@ function App(): React.JSX.Element {
                 defaultValue={selectedTodo?.description}
               />
             </Dialog>
-            <FabButton onClick={() => openTodoFormDialog()}>
+            <FabButton onClick={(): void => openTodoFormDialog()}>
               <IconPlus />
             </FabButton>
           </Footer>

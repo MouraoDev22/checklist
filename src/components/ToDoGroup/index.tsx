@@ -15,7 +15,7 @@ export function ToDoGroup({
     <>
       <SubHeading>{heading}</SubHeading>
       <ToDoList>
-        {items.map((item: Task) => (
+        {items.map((item: Task): React.JSX.Element => (
           <ToDoItem key={item.id} item={item} />
         ))}
       </ToDoList>

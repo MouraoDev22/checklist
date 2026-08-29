@@ -34,7 +34,7 @@ export function ToDoItem({ item }: { item: Task }): React.JSX.Element {
           type="checkbox"
           className="checkbox"
           checked={item.completed}
-          onChange={() => toggleTodoCompleted(item)}
+          onChange={(): void => toggleTodoCompleted(item)}
           title="checkbox"
         />
         <p className="description">{item.description}</p>
@@ -43,7 +43,7 @@ export function ToDoItem({ item }: { item: Task }): React.JSX.Element {
             className="btn"
             type="button"
             title="Excluir"
-            onClick={() => deleteTodo(item)}
+            onClick={(): void => deleteTodo(item)}
           >
             <IconTrash />
           </button>
@@ -51,7 +51,7 @@ export function ToDoItem({ item }: { item: Task }): React.JSX.Element {
             className="btn"
             type="button"
             title="Editar"
-            onClick={() => openTodoFormDialog(item)}
+            onClick={(): void => openTodoFormDialog(item)}
           >
             <IconPencil />
           </button>
