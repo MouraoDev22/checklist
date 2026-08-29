@@ -14,6 +14,7 @@ import { Heading } from "./components/Heading";
 import { Dialog } from "./components/Dialog";
 import { IconPlus, IconSchool } from "./components/icons";
 import { ToDoGroup } from "./components/ToDoGroup";
+import { EmptyState } from "./components/EmptyState";
 import { ToDoForm } from "./components/ToDoForm";
 
 function App(): React.JSX.Element {
@@ -59,6 +60,7 @@ function App(): React.JSX.Element {
             heading="Para estudar"
             items={todos.filter((t: Task): boolean => !t.completed)}
           />
+          {todos.length == 0 && <EmptyState />}
           <ToDoGroup
             heading="Concluído"
             items={todos.filter((t: Task): boolean => t.completed)}
